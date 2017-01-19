@@ -11,9 +11,113 @@
     <link rel="stylesheet" type="text/css"
     href="bower_components/datatables/media/css/dataTables.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="./css/full.css">
+    <link rel="stylesheet" type="text/css" href="./css/estilos.css">
   </head>
   <body>
     <div class="container" id="contenido">
+
+      <div class="row dashboard-head">
+        <div class="col-sm-2" id="emails">
+          <h4 class="text-danger">Total Emails</h4>
+          <span id="total"></span>
+        </div>
+        <div class="col-sm-2">
+          <h4 class="text-primary">Filter Emails </h4>
+          <span id="filtrados"></span>
+        </div>
+        <div class="col-sm-4" id="region">
+          <div class="title"><strong>Region </strong></div>
+        </div>
+        <div class="col-sm-4" id="pais">
+          <div class="title"><strong>Pais</strong></div>
+        </div>
+        <div class="col-sm-4" id="anio">
+          <div class="title"><strong>Año</strong></div>
+        </div>
+        <div class="col-sm-4" id="mes">
+          <div class="title"><strong>Mes</strong></div>
+        </div>  
+      </div>
+
+      <div class="row">
+        <div class="col-md-4" id="tiempoEmail">
+          <div class="chart-title">
+            <strong> Total Sends over time</strong>
+            <span>
+              <a class="reset"
+                href="javascript:emailTiempo.filterAll();dc.redrawAll();"
+                style="display:none">¿Reiniciar gráfico?</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-md-4" id="totalRecipients">
+            <div class="chart-title">
+              <strong>Total  Sends</strong>
+              <span>
+                <a class="reset"
+                  href="javascript:emailRecipients.filterAll();dc.redrawAll();"
+                  style="display:none">¿Reiniciar gráfico? </a>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4" id="successful">
+            <strong> Total Successful</strong>
+            <span>
+              <a class="reset"
+                href="javascript:emailExito.filterAll();dc.redrawAll();"
+                style="display:none"> ¿Reiniciar gráfico?</a>
+            </span>
+          </div>
+      </div>
+
+
+      <div class="row">
+          <div class="col-md-4" id="unique">
+            <div class="chart-title">
+              <strong>Total Unique</strong>
+              <span>
+                <a class="reset"
+                  href="javascript:emailUnique.filterAll();dc.redrawAll();"
+                  style="display:none">¿Reiniciar gráfico? </a>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4" id="uniqueClicks">
+            <strong> Total Clicks</strong>
+            <span>
+              <a class="reset"
+                href="javascript:emailClicks.filterAll();dc.redrawAll();"
+                style="display:none"> ¿Reiniciar gráfico?</a>
+            </span>
+          </div>
+      </div>
+
+     <div class="row">
+          <div class="col-md-4" id="consideracion">
+            <div class="chart-title">
+              <strong>Interest</strong>
+              <span>
+                <a class="reset"
+                  href="javascript:emailConsidera.filterAll();dc.redrawAll();"
+                  style="display:none">¿Reiniciar gráfico? </a>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4" id="satisfaccion">
+            <strong> Email's satisfaction</strong>
+            <span>
+              <a class="reset"
+                href="javascript:emailSatisfecho.filterAll();dc.redrawAll();"
+                style="display:none"> ¿Reiniciar gráfico?</a>
+            </span>
+          </div>
+      </div>
+
+
+
       
 
     </div> 
@@ -27,7 +131,7 @@
     <script type="text/javascript"
       src="bower_components/crossfilter2/crossfilter.min.js ">
     </script>
-    <script type="text/javascript" src="bower_components/dcjs/dc.min.js">
+    <script type="text/javascript" src="bower_components/dcjs/dc.js">
     </script>
     <script type="text/javascript"
       src="bower_components/reductio/reductio.min.js"></script>

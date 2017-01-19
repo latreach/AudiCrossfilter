@@ -1,0 +1,43 @@
+.dc-chart text{
+  fill: black;
+}
+
+#enviados{
+  width: 50%;
+  margin: 0 auto;
+}
+#totalRecipients{
+  width:50%;
+  margin: 0 auto;
+}
+
+#bounce{
+  width:50%;
+  margin:0 auto;
+}
+#successful{
+  width: 50%;
+  margin: 0 auto;
+}
+
+#unique{
+  width: 50%;
+  margin: 0 auto;
+}
+
+#uniqueClicks{
+  width:50%;
+  margin: 0 auto;
+}
+
+#consideracion{
+  width: 50%;
+  margin: 0 auto;
+}
+
+#satisfaccion{
+  width:50%
+  margin: 0 auto;
+}
+
+
