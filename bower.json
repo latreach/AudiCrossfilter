@@ -1,0 +1,27 @@
+{
+  "name": "audiCrossfilter",
+  "authors": [
+    "FerDoranNie <fertimjim@gmail.com>"
+  ],
+  "description": "Crossfilter of simulated data for Audi Latinoamerica",
+  "main": "js/index.js",
+  "keywords": [
+    "Cars",
+    "Email"
+  ],
+  "license": "MIT",
+  "homepage": "www.base10.mx",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "dcjs": "^2.1.2",
+    "d3": "v3.4.13",
+    "reductio": "^0.6.3"
+  }
+}
