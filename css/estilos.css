@@ -92,5 +92,11 @@ li a {
 li, a span{
   color:white;
 }
+
+#barra ul li a {
+color:black;
+}
+#barra ul li a::selection{color:red;}
+
 /*
 div.content {width:1000px;}*/

@@ -68,6 +68,8 @@ d3.csv("./data/datos.csv", function(error, data){
     d.SuccessfulRecipients = +d.SuccessfulRecipients;
     d.uniqueOpens = +d.uniqueOpens;
     d.OpenRate = +d.OpenRate;
+    d.OpenRatePercent = Math.round(d.OpenRate*100);
+    d.OpenRateSt = String(d.OpenRatePercent + "%");
     d.uniqueClicks = +d.uniqueClicks;
     d.consideracion = String(d.consideracion);
     d.satisfaccion = +d.satisfaccion;
@@ -93,9 +95,10 @@ d3.csv("./data/datos.csv", function(error, data){
   var enviadoGroup = mes.group().reduceCount(function(d){
     return d.idEmail;
   })
+  
   var ejeXBarra = d3.svg.axis().scale(d3.scale.ordinal()).orient("bottom")
-    .tickValues(["Jan", "Feb", "Mar", "Apr", "May","Jun", "Jul", "Ago",
-    "Sep", "Oct", "Nov", "Dic"])
+    .tickValues(["J", "F", "M", "4", "5","6", "7", "8",
+    "9", "10", "11", "12"])
 
 
   var ejeYBarra = d3.svg.axis().scale("y")
@@ -135,15 +138,16 @@ d3.csv("./data/datos.csv", function(error, data){
     .elasticY(true)
     .brushOn(false)
     .elasticX(true)
-    .xAxis(ejeXBarra)
+    //.xAxis(ejeXBarra)
     .yAxis(ejeYBarra);
     //.yAxis().tickFormat(function(v){return numberFormatter(v)});
     //.xAxis();
-  
+  /*
    emailRecipients.on('renderlet',function(c){
       c.selectAll("g.x","text")
-      .attr('transform','translate(0,0)')
-  })
+        .attr('transform','translate(0'+ 200 + ")")
+        .attr('text-anchor', "middle")
+  })*/
   //d3.select("totalRecipients > svg >g").attr("transform","translate(-10-10)")
  
 
@@ -273,9 +277,17 @@ d3.csv("./data/datos.csv", function(error, data){
     return d3.time.day(new Date(d.fecha));
   })
   
+  /*
+  var emailDiaGroup = dia.group().reduce(function reduceAdd(p,v){
+    return v.TotalRecipients;
+  }, function reduceRemove(p,v){return v.TotalRecipients},
+  function reduceInitial(){return 0;}) 
+  emailDiaGroup.dispose();
+*/
   var emailDiaGroup = dia.group().reduceSum(function(d){
     return d.TotalRecipients;
-  }) 
+  })
+
 
   ejeX= d3.svg.axis().scale("x").orient("bottom")
     .tickFormat(multiDateFormatter)
@@ -297,9 +309,16 @@ d3.csv("./data/datos.csv", function(error, data){
     .xAxis(ejeX)
     .yAxis(ejeY);
 
-  var emailPercentGroup = dia.group().reduceCount(function(d){
-    return d.OpenRate*100
-  })
+
+
+  var emailPercentGroup = dia.group()
+    .reduce(function reduceAdd(p,v){
+    return  v.OpenRatePercent
+  },function reduceRemove(p,v){
+    return v.OpenRatePercent
+  },function reduceInitial(){return 0;})
+
+  emailPercentGroup.dispose();
 
   ejeYP = d3.svg.axis().scale("y").orient("left")
     .tickFormat(function(v){return v + "%"})
@@ -394,7 +413,7 @@ d3.csv("./data/datos.csv", function(error, data){
       {"mData":"bounce","sDefaultContent":""},
       {"mData":"SuccessfulRecipients", "sDefaultContent":""},
       {"mData":"uniqueOpens", "sDefaultContent":""},
-      {"mData":"OpenRate", "sDefaultContent":""},
+      {"mData":"OpenRateSt", "sDefaultContent":""},
       {"mData":"uniqueClicks", "sDefaultContent":""}
      // {"mData":"consideracion","sDefaultContent":""},
       //{"mData":"satisfaccion","sDefaultContent":""},
