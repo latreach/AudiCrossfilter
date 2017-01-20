@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+  
   <head>
     <meta charset="utf-8">
     <meta name="viewport"content="width=device-width, initial-scale=1">
+    <meta name="autho" content="Fernando Dorantes Nieto">
     <title>Audi Lastenheft</title>
     <link rel="stylesheet" type="text/css"
     href="bower_components/font-awesome/css/font-awesome.min.css">
@@ -15,14 +17,16 @@
     <link rel="stylesheet" type="text/css" href="./css/full.css">
     <link rel="stylesheet" type="text/css" href="./css/estilos.css">
   </head>
+
   <body>
+   
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid"id="container">
-       <div class="navbar-header">
-         <a class="pull-left" href="./">
-         <img src="logo/logo2.png" class="logo">
-          Audi Lastenheft
-         </a>
+        <div class="navbar-header">
+           <a class="pull-left" href="./">
+              <img src="logo/logo2.png" class="logo">
+            Audi Lastenheft
+           </a>
         </div>
       <div class="nav navbar-collapse" id="barra">
         <ul class="nav navbar-nav navbar-right">
@@ -36,8 +40,8 @@
             <a href="Digital">Digital</a>
           </li>
         </ul>
+        </div>
       </div>
-    </div>
     </nav>
 
 
@@ -87,7 +91,7 @@
       <div class="row">
         <div class="col-md-4" id="tiempoEmail">
           <div class="chart-title">
-            <strong> Total Sends over time</strong>
+            <strong> Total deliveries over time</strong>
             <span>
               <span class="reset" style="display: none;">Date
                 <span class="filter"></span></span>
@@ -99,7 +103,7 @@
         </div>
         <div class="col-md-4" id="Rate">
           <div class="chart-title">
-            <strong> Successful sends over time (percent)</strong>
+            <strong> Successful deliveries over time (percent)</strong>
             <span>
               <span class="reset" style="display:none;">Date
                 <span class="filter"></span></span>
@@ -114,7 +118,7 @@
       <div class="row">
           <div class="col-md-4" id="totalRecipients">
             <div class="chart-title">
-              <strong>Total  Sends  by month</strong>
+              <strong>Total  deliveries  by month</strong>
               <span>
                 <a class="reset"
                   href="javascript:emailRecipients.filterAll();dc.redrawAll();"
@@ -123,7 +127,7 @@
             </div>
           </div>
           <div class="col-md-4" id="successful">
-            <strong> Total Successful sends by month</strong>
+            <strong> Total Successful deliveries by month</strong>
             <span>
               <a class="reset"
                 href="javascript:emailExito.filterAll();dc.redrawAll();"
@@ -163,6 +167,10 @@
                   href="javascript:emailConsidera.filterAll();dc.redrawAll();"
                   style="display:none">Restart? </a>
               </span>
+             <h6 class="text-danger"> 
+               5: Means the highest buy's intentions<br/>
+               1: Means the lowest buy's intentions
+             </h6>
             </div>
           </div>
           <div class="col-md-4" id="satisfaccion">
@@ -172,6 +180,10 @@
                 href="javascript:emailSatisfecho.filterAll();dc.redrawAll();"
                 style="display:none"> Restart?</a>
             </span>
+            <h6 class="text-danger">
+              10: Means the highest level of satisfaction of the client<br/>
+              1: Means the lowest level of satisfaction of the client
+            </h6>
           </div>
     </div>
 
