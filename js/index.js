@@ -289,9 +289,7 @@ d3.csv("./data/datos.csv", function(error, data){
     .dimension(dia)
     .group(emailDiaGroup)
     .colors(["black"])
-    //.x(d3.time.scale().domain([new Date(2015,0,1),new Date(2016,12,31)]))
     .x(d3.time.scale().domain([new Date(dateMin), new Date(dateMax)]))
-    //.x(d3.time.scale().domain[dateMin, dateMax])
     .round(d3.time.month.round)
     .xUnits(d3.time.months)
     .elasticY(true)
@@ -319,7 +317,6 @@ d3.csv("./data/datos.csv", function(error, data){
     .elasticX(true)
     .xAxis(ejeX)
     .yAxis(ejeYP);
-
 
 
   var regionDim = xfilter.dimension(function(d){
