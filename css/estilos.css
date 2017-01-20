@@ -1,4 +1,4 @@
-.tnav .navbar{background:#A0ABB0;}
+.tnav .navbar{background:white;}
 .navbar-fixed-top{
   min-height:60px;
   background:#A0ABB0;
@@ -78,6 +78,19 @@ tr.tabla1{
   th {
     width:40px;
   }
+}
+a{
+  color:red;
+}
+p, a span{
+  color: red;
+}
+li a {
+  color:white;
+}
+
+li, a span{
+  color:white;
 }
 /*
 div.content {width:1000px;}*/
