@@ -15,7 +15,8 @@ Primero dirigete  o crea un directorio donde quieres clonar este repositorio.
 mkdir tu directorio a crear
 cd tu directorio
 ```
-
+Clona el directorio e instala el gestor de paquetes bower,
+para este caso se espera que el usuario tenga instalado node y npm.
 ```sh
 git clone https://github.com/latreach/AudiCrossfilter
 npm install -g bower 
@@ -25,5 +26,5 @@ bower.json
 ```sh
 bower install 
 ```
-Una vez hecho esto solo abrimos el archivo index.html en nuestro navegador.
+Una vez hecho esto, solo abrimos el archivo index.html en nuestro navegador.
 
