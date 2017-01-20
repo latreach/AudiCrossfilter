@@ -21,6 +21,7 @@ var dateFormatter = ES.timeFormat('%b %Y');
 var fullDateFormatter = ES.timeFormat("%Y-%m-%d");
 var dateFormatter = d3.time.format('%m/%d/%Y');
 var numberFormatter = d3.format(".2s");
+var formatoNumero = d3.format(',.0f');
 
 var multiDateFormatter = ES.timeFormat.multi([
             [".%L", function(d) { return d.getMilliseconds(); }],
@@ -135,11 +136,30 @@ d3.csv("./data/datos.csv", function(error, data){
     .colors(["#E31536"])
     .x(d3.scale.ordinal())
     .xUnits(dc.units.ordinal)
+    .label(function(d){return d.key;})
     .elasticY(true)
     .brushOn(false)
     .elasticX(true)
     //.xAxis(ejeXBarra)
-    .yAxis(ejeYBarra);
+    .yAxis(ejeYBarra)
+    .on("renderlet", function(chart){
+      var dataBar=[]
+      var bars = chart.selectAll(".bar")
+        .each(function(d){dataBar.push(d)})
+      d3.select(bars[0][0].parentNode).select("#outline-labels").remove();
+      var labels = d3.select(bars[0][0].parentNode)
+        .append('g').attr('id','outline-labels')
+      for (var i=bars[0].length-1; i>=0; i-- ){
+        var b= bars[0][i];
+      labels.append('text')
+        .text(formatoNumero(dataBar[i].data.value))
+        .attr("x", +b.getAttribute("x")+(b.getAttribute('width')/2))
+        .attr("y",+b.getAttribute('y')+b.getAttribute('height')/2)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', "10px")
+        .style('fill','white')
+      }
+    });
     //.yAxis().tickFormat(function(v){return numberFormatter(v)});
     //.xAxis();
   /*
@@ -181,7 +201,26 @@ d3.csv("./data/datos.csv", function(error, data){
     .elasticY(true)
     .brushOn(false)
     .elasticX(true)
-    .yAxis().tickFormat(function(v){return  numberFormatter(v)});
+    .on("renderlet", function(chart){
+      var dataBar=[]
+      var bars = chart.selectAll(".bar")
+        .each(function(d){dataBar.push(d)})
+      d3.select(bars[0][0].parentNode).select("#outline-labels").remove();
+      var labels = d3.select(bars[0][0].parentNode)
+        .append('g').attr('id','outline-labels')
+      for (var i=bars[0].length-1; i>=0; i-- ){
+        var b= bars[0][i];
+      labels.append('text')
+        .text(formatoNumero(dataBar[i].data.value))
+        .attr("x", +b.getAttribute("x")+(b.getAttribute('width')/2))
+        .attr("y",+b.getAttribute('y')+b.getAttribute('height')/2)
+        .attr('text-anchor', 'middle')
+        .style('fill', 'white')
+        .attr('font-size', "10px")
+      }
+    })
+   .yAxis().tickFormat(function(v){return  numberFormatter(v)});
+ 
   
   var uniqueGroup = mes.group().reduceSum(function(d){
     return d.uniqueOpens;
@@ -198,6 +237,24 @@ d3.csv("./data/datos.csv", function(error, data){
     .elasticY(true)
     .brushOn(false)
     .elasticX(true)
+    .on('renderlet', function(chart){
+      var dataBar = []
+      var bars = chart.selectAll('.bar')
+        .each(function(d){dataBar.push(d)})
+      d3.select(bars[0][0].parentNode).select('#outline-labels').remove();
+      var labels = d3.select(bars[0][0].parentNode)
+        .append('g').attr('id', 'outline-labels')
+      for(var i=bars[0].length-1;i>=0; i--){
+        var b = bars[0][i];
+        labels.append('text')
+          .text(formatoNumero(dataBar[i].data.value))
+          .attr('x',+b.getAttribute('x')+ (b.getAttribute('width')/2))
+          .attr('y', + b.getAttribute('y')+(b.getAttribute('height')/2))
+          .attr('text-anchor','middle')
+          .style('fill','white')
+          .attr('font-size','10px')
+      }
+    })
     .yAxis().tickFormat(function(v){return numberFormatter(v)});
   
   var clicksGroup = mes.group().reduceSum(function(d){
@@ -215,6 +272,24 @@ d3.csv("./data/datos.csv", function(error, data){
     .elasticY(true)
     .brushOn(false)
     .elasticX(true)
+    .on('renderlet', function(chart){
+      var dataBar = []
+      var bars = chart.selectAll('.bar')
+        .each(function(d){dataBar.push(d)})
+      d3.select(bars[0][0].parentNode).select('#outline-labels').remove();
+      var labels=d3.select(bars[0][0].parentNode)
+        .append('g').attr('id','outline-labels')
+      for(var i=bars[0].length-1;i>=0;i--){
+        var b = bars[0][i]
+        labels.append('text')
+          .text(formatoNumero(dataBar[i].data.value))
+          .attr('x',+b.getAttribute('x')+(b.getAttribute('width')/2))
+          .attr('y',+b.getAttribute('y')+(b.getAttribute('height')/2))
+          .attr('text-anchor','middle')
+          .style('fill','white')
+          .attr('font-size','10px')
+      }
+    })
     .yAxis().tickFormat(function(v){return numberFormatter(v)});
 
   var consideraDim = xfilter.dimension(function(d){

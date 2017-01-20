@@ -1,2 +1,4 @@
 #Paquetes
 bower_components
+*.swp
+*.swo
