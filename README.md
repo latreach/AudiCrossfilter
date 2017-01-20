@@ -9,3 +9,15 @@ Los datos fueron simulados con el software estadístico [R](https://cran.r-proje
 
 * R y Javascript
 
+##¿Cómo probar este crossfilter?
+```sh
+git clone https://github.com/latreach/AudiCrossfilter
+npm install -g bower 
+```
+Posteriormente instalamos las paqueterías cuyo nombre están en el archivo
+bower.json
+```sh
+bower install 
+```
+Una vez hecho esto solo abrimos el archivo index.html en nuestro navegador.
+
