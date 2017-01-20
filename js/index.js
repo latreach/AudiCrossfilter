@@ -54,6 +54,7 @@ var emailEnviado    = dc.barChart("#enviados"),
     emailAnio       = dc.selectMenu("#anio"),
     emailMes        = dc.selectMenu("#mes"),
     emailPorcentaje = dc.lineChart("#Rate");
+    console.log("está listo")
 
 //crossfiler
 
