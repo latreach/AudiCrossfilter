@@ -1,3 +1,11 @@
+.tnav .navbar{background:#A0ABB0;}
+.navbar-fixed-top{
+  min-height:60px;
+  background:#A0ABB0;
+  float:right;
+  color=#FFFFFF;
+}
+
 .dc-chart text{
   fill: black;
 }
@@ -6,15 +14,22 @@
   width: 50%;
   margin: 0 auto;
 }
+
 #totalRecipients{
   width:50%;
   margin: 0 auto;
+}
+
+#totalRecipients .x.axis.text{
+  text-anchor: end !important;
+  transform: rotate(-45deg);
 }
 
 #bounce{
   width:50%;
   margin:0 auto;
 }
+
 #successful{
   width: 50%;
   margin: 0 auto;
@@ -36,8 +51,33 @@
 }
 
 #satisfaccion{
-  width:50%
+  width:50%;
+  margin: 0 auto;
+}
+#tiempoEmail{
+  width:50%;
+  margin:0 auto;
+}
+
+#Rate{
+  width:50%;
   margin: 0 auto;
 }
 
+#table{
+  position:relative;
+  width:50%;
+  margin:0 auto;
+}
 
+.row{
+  margin.bottom: 20px;
+}
+
+tr.tabla1{
+  th {
+    width:40px;
+  }
+}
+/*
+div.content {width:1000px;}*/

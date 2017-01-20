@@ -14,6 +14,18 @@
     <link rel="stylesheet" type="text/css" href="./css/estilos.css">
   </head>
   <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid"id="container">
+       <div class="navbar-header">
+         <a class="pull-right" href="./">
+         <img src="logo/logo2.png" class="logo">
+          Audi Lastenheft
+         </a>
+        </div>
+      </div>
+    </nav>
+
+
     <div class="container" id="contenido">
 
       <div class="row dashboard-head">
@@ -29,14 +41,17 @@
           <div class="title"><strong>Region </strong></div>
         </div>
         <div class="col-sm-4" id="pais">
-          <div class="title"><strong>Pais</strong></div>
+          <div class="title"><strong>Country</strong></div>
         </div>
         <div class="col-sm-4" id="anio">
-          <div class="title"><strong>Año</strong></div>
+          <div class="title"><strong>Year</strong></div>
         </div>
         <div class="col-sm-4" id="mes">
-          <div class="title"><strong>Mes</strong></div>
+          <div class="title"><strong>Month</strong></div>
         </div>  
+        <div class="col-sm.2">
+          <a href="javascript:dc.filterAll();dc.redrawAll();">Restart all</a>
+        </div>
       </div>
 
       <div class="row">
@@ -44,31 +59,45 @@
           <div class="chart-title">
             <strong> Total Sends over time</strong>
             <span>
+              <span class="reset" style="display: none;">Date
+                <span class="filter"></span></span>
               <a class="reset"
                 href="javascript:emailTiempo.filterAll();dc.redrawAll();"
-                style="display:none">¿Reiniciar gráfico?</a>
+                style="display:none">Restart?</a>
             </span>
           </div>
         </div>
-      </div>
+        <div class="col-md-4" id="Rate">
+          <div class="chart-title">
+            <strong> Successful sends over time (percent)</strong>
+            <span>
+              <span class="reset" style="display:none;">Date
+                <span class="filter"></span></span>
+              <a class="reset"
+                  href="javascript:emailPorcentaje.filterAll();dc.redrawAll();"
+                  style="display:none">Restart?</a>
+              </span>
+          </div>
+        </div>
+     </div>
       
       <div class="row">
           <div class="col-md-4" id="totalRecipients">
             <div class="chart-title">
-              <strong>Total  Sends</strong>
+              <strong>Total  Sends  by month</strong>
               <span>
                 <a class="reset"
                   href="javascript:emailRecipients.filterAll();dc.redrawAll();"
-                  style="display:none">¿Reiniciar gráfico? </a>
+                  style="display:none">Restart? </a>
               </span>
             </div>
           </div>
           <div class="col-md-4" id="successful">
-            <strong> Total Successful</strong>
+            <strong> Total Successful sends by month</strong>
             <span>
               <a class="reset"
                 href="javascript:emailExito.filterAll();dc.redrawAll();"
-                style="display:none"> ¿Reiniciar gráfico?</a>
+                style="display:none">Restart?</a>
             </span>
           </div>
       </div>
@@ -77,20 +106,20 @@
       <div class="row">
           <div class="col-md-4" id="unique">
             <div class="chart-title">
-              <strong>Total Unique</strong>
+              <strong>Total Unique Opens by month</strong>
               <span>
                 <a class="reset"
                   href="javascript:emailUnique.filterAll();dc.redrawAll();"
-                  style="display:none">¿Reiniciar gráfico? </a>
+                  style="display:none">Restart? </a>
               </span>
             </div>
           </div>
           <div class="col-md-4" id="uniqueClicks">
-            <strong> Total Clicks</strong>
+            <strong> Total Unique Clicks by month</strong>
             <span>
               <a class="reset"
                 href="javascript:emailClicks.filterAll();dc.redrawAll();"
-                style="display:none"> ¿Reiniciar gráfico?</a>
+                style="display:none"> Restart?</a>
             </span>
           </div>
       </div>
@@ -98,11 +127,11 @@
      <div class="row">
           <div class="col-md-4" id="consideracion">
             <div class="chart-title">
-              <strong>Interest</strong>
+              <strong>Interest's level</strong>
               <span>
                 <a class="reset"
                   href="javascript:emailConsidera.filterAll();dc.redrawAll();"
-                  style="display:none">¿Reiniciar gráfico? </a>
+                  style="display:none">Restart? </a>
               </span>
             </div>
           </div>
@@ -111,16 +140,55 @@
             <span>
               <a class="reset"
                 href="javascript:emailSatisfecho.filterAll();dc.redrawAll();"
-                style="display:none"> ¿Reiniciar gráfico?</a>
+                style="display:none"> Restart?</a>
             </span>
           </div>
+    </div>
+
+    <div class="row-table-responsive" style="width:100%" id="table"
+      align="left">
+      <table id="tabla" class="list table table-striped table-bordered">
+        <thead>
+          <tr class="tabla1">
+            <th width=10>Date</th>
+            <th width=10>Region</th>
+            <th width=10>Country</th>
+            <th width=10>IDEmail</th>
+            <th width=10>TotalRecipients</th>
+            <th width=10>Bounce</th>
+            <th width=10>Succesful</th>
+            <th width=10>UniqueOpens</th>
+            <th width=10>OpenRate</th>
+            <th width=10>UniqueClicks</th>
+          </tr>
+        </thead>
       </div>
 
-
-
       
+    <div class="row-text-center">
+    <h4 class="text-danger">Los datos presentados son ficticios y
+    fueron simulados para fines demostrativos</h4>
+    </div>
 
-    </div> 
+
+</div>
+  
+</div> 
+
+
+
+
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid" id="container2">
+      <div>
+        <a class="pull-right" href="http://www.base10.mx">
+          <img src="logo/LogoBase.png" class="logo" >
+          Base10
+        </a>
+      </div>
+    </div>
+  </nav>
+
     <script type="text/javascript"
       src="bower_components/jquery/dist/jquery.min.js">
     </script>

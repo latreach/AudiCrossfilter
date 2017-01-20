@@ -51,7 +51,8 @@ var emailEnviado    = dc.barChart("#enviados"),
     emailRegion     = dc.selectMenu("#region"),
     emailPais       = dc.selectMenu("#pais"),
     emailAnio       = dc.selectMenu("#anio"),
-    emailMes        = dc.selectMenu("#mes");
+    emailMes        = dc.selectMenu("#mes"),
+    emailPorcentaje = dc.lineChart("#Rate");
 
 //crossfiler
 
@@ -92,6 +93,21 @@ d3.csv("./data/datos.csv", function(error, data){
   var enviadoGroup = mes.group().reduceCount(function(d){
     return d.idEmail;
   })
+  var ejeXBarra = d3.svg.axis().scale(d3.scale.ordinal()).orient("bottom")
+    .tickValues(["Jan", "Feb", "Mar", "Apr", "May","Jun", "Jul", "Ago",
+    "Sep", "Oct", "Nov", "Dic"])
+
+
+  var ejeYBarra = d3.svg.axis().scale("y")
+    .orient("left")
+    .tickFormat(function(v){return numberFormatter(v)})
+
+  /*
+  this.svg.append("g")
+    .attr('class', "axis")
+    .transform('transform','translate(0,' + this.xScale(0) + ')')
+    .call(ejeXBarra)
+*/
   emailEnviado
     .height(200)
     .width(500)
@@ -104,6 +120,7 @@ d3.csv("./data/datos.csv", function(error, data){
     .elasticX(true)
     .xAxis();
   
+  
   var recipientsGroup= mes.group().reduceSum(function(d){
     return d.TotalRecipients;})
 
@@ -112,13 +129,23 @@ d3.csv("./data/datos.csv", function(error, data){
     .width(500)
     .dimension(mes)
     .group(recipientsGroup)
+    .colors(["#E31536"])
     .x(d3.scale.ordinal())
     .xUnits(dc.units.ordinal)
     .elasticY(true)
     .brushOn(false)
     .elasticX(true)
-    .yAxis().tickFormat(function(v){return numberFormatter(v)});
+    .xAxis(ejeXBarra)
+    .yAxis(ejeYBarra);
+    //.yAxis().tickFormat(function(v){return numberFormatter(v)});
     //.xAxis();
+  
+   emailRecipients.on('renderlet',function(c){
+      c.selectAll("g.x","text")
+      .attr('transform','translate(0,0)')
+  })
+  //d3.select("totalRecipients > svg >g").attr("transform","translate(-10-10)")
+ 
 
   var fallosGroup = mes.group().reduceSum(function(d){
     return d.bounce;})
@@ -144,6 +171,7 @@ d3.csv("./data/datos.csv", function(error, data){
     .width(500)
     .dimension(mes)
     .group(exitoGroup)
+    .colors(["#E31536"])
     .x(d3.scale.ordinal())
     .xUnits(dc.units.ordinal)
     .elasticY(true)
@@ -160,6 +188,7 @@ d3.csv("./data/datos.csv", function(error, data){
     .width(500)
     .dimension(mes)
     .group(uniqueGroup)
+    .colors(["#E31536"])
     .x(d3.scale.ordinal())
     .xUnits(dc.units.ordinal)
     .elasticY(true)
@@ -176,6 +205,7 @@ d3.csv("./data/datos.csv", function(error, data){
     .width(500)
     .dimension(mes)
     .group(clicksGroup)
+    .colors(["#E31536"])
     .x(d3.scale.ordinal())
     .xUnits(dc.units.ordinal)
     .elasticY(true)
@@ -194,9 +224,11 @@ d3.csv("./data/datos.csv", function(error, data){
     .height(300)
     .width(500)
     .dimension(consideraDim)
-    .colors(d3.scale.ordinal()
+    /*.colors(d3.scale.ordinal()
       .range(["#003c65", "#64b5f6", "#18a151",
-          "#ff9e10","#dc4a3d", "#3569d6", "#003366","#b87e7e", "#003366","black"]))
+          "#ff9e10","#dc4a3d", "#3569d6", "#003366","#b87e7e", "#003366","black"]))*/
+    .colors(d3.scale.ordinal()
+      .range(["#98271F","#1A5050","#A53462","#0350AA","#F67301"]))
     .group(consideraGroup)
     //.valueAccessor(function(p){return p.value.count})
     .elasticX(true)
@@ -214,10 +246,9 @@ d3.csv("./data/datos.csv", function(error, data){
     .width(500)
     .dimension(satisfechoDim)
     .colors(d3.scale.ordinal()
-      .range(["#003c65", "#64b5f6", "#18a151",
-          "#ff9e10","#dc4a3d", "#3569d6", "#003366","#b87e7e", "#003366","black"]))
+      .range(["#982271F","#1A5050","#A53462","0350AA","#F67301"
+            ,"#003c65","#223F29", "#390104", "#240000", "black"]))
     .group(satisfechoGroup)
-    //.valueAccessor(function(p){return p.value.count})
     .elasticX(true)
     .xAxis().tickFormat(function(v){return numberFormatter(v)})
     
@@ -237,11 +268,11 @@ d3.csv("./data/datos.csv", function(error, data){
     return d.fecha;
   })
   var dateMax = new Date(dateMax);
-  console.log(dateMax)
+  
   var dia = xfilter.dimension(function(d){
     return d3.time.day(new Date(d.fecha));
   })
-  console.log(dia.top(1))
+  
   var emailDiaGroup = dia.group().reduceSum(function(d){
     return d.TotalRecipients;
   }) 
@@ -254,7 +285,7 @@ d3.csv("./data/datos.csv", function(error, data){
 
   emailTiempo
     .height(200)
-    .width(1000)
+    .width(500)
     .dimension(dia)
     .group(emailDiaGroup)
     .colors(["black"])
@@ -268,6 +299,28 @@ d3.csv("./data/datos.csv", function(error, data){
     .xAxis(ejeX)
     .yAxis(ejeY);
 
+  var emailPercentGroup = dia.group().reduceCount(function(d){
+    return d.OpenRate*100
+  })
+
+  ejeYP = d3.svg.axis().scale("y").orient("left")
+    .tickFormat(function(v){return v + "%"})
+
+  emailPorcentaje
+    .height(200)
+    .width(500)
+    .dimension(dia)
+    .group(emailPercentGroup)
+    .colors(["black"])
+    .x(d3.time.scale().domain([new Date(dateMin), new Date(dateMax)]))
+    .round(d3.time.day.round)
+    .xUnits(d3.time.days)
+    .elasticY(true)
+    .elasticX(true)
+    .xAxis(ejeX)
+    .yAxis(ejeYP);
+
+
 
   var regionDim = xfilter.dimension(function(d){
     return d.Region;
@@ -278,7 +331,7 @@ d3.csv("./data/datos.csv", function(error, data){
   emailRegion
     .dimension(regionDim)
     .group(regionGroup)
-    .promptText("Todas las regiones")
+    .promptText("All regions")
   
   var paisDim = xfilter.dimension(function(d){
     return d.Pais;
@@ -290,7 +343,7 @@ d3.csv("./data/datos.csv", function(error, data){
   emailPais
     .dimension(paisDim)
     .group(paisGroup)
-    .promptText("Todos los paises")
+    .promptText("All countries")
   
   var anioDim = xfilter.dimension(function(d){
     return d.anio;
@@ -302,30 +355,64 @@ d3.csv("./data/datos.csv", function(error, data){
   emailAnio
     .dimension(anioDim)
     .group(anioGroup)
-    .promptText("Todos")
+    .promptText("All years")
 
   var mesNDim = xfilter.dimension(function(d){
-    return d.mesNombre;
+    return mesFormato(new Date(d.fecha));
   })
   
   var mesNGroup= mesNDim.group()
-    .reduceCount(function(d){return d.mesNombre})
+    .reduceCount(function(d){return mesFormato(new Date(d.fecha))})
 
   emailMes
     .dimension(mesNDim)
     .group(mesNGroup)
-    .promptText("Todos")
+    .promptText("All months")
 
+//tabla 
+  function RefreshTable(){
+    dc.events.trigger(function(){
+      alldata = mes.top(Infinity);
+      datatable.fnClearTable();
+      datatable.fnAddData(alldata);
+      datatable.fnDraw();
+    })
+  }
 
+  var datatable = $("#tabla").dataTable({
+    "bPaginate":true,
+    "bLengthChange":true,
+    "bFilter":true,
+    "bInfo":false,
+    "bAutoWidth":false,
+    "bDeferRender":true,
+    "bDestroy":true,
+    "aadata":mes.top(Infinity),
+    "aoColumns":[
+      {"mData":"fecha","sDefaultContent":""},
+      {"mData":"Region","sDefaultContent":""},
+      {"mData":"Pais", "sDefaultContent":""},
+      {"mData":"idEmail", "sDefaultContent":""},
+      {"mData":"TotalRecipients","sDefaultContent":""},
+      {"mData":"bounce","sDefaultContent":""},
+      {"mData":"SuccessfulRecipients", "sDefaultContent":""},
+      {"mData":"uniqueOpens", "sDefaultContent":""},
+      {"mData":"OpenRate", "sDefaultContent":""},
+      {"mData":"uniqueClicks", "sDefaultContent":""}
+     // {"mData":"consideracion","sDefaultContent":""},
+      //{"mData":"satisfaccion","sDefaultContent":""},
+    
+    ]
+  });
+  for (var z=0; z<dc.chartRegistry.list().length;z++){
+    var chartI = dc.chartRegistry.list()[z];
+    chartI.on("filtered", function(){
+      RefreshTable();
+    })
+  }
 
-dc.renderAll();
+  RefreshTable();
 
-
-
-  
-
-  
+  dc.renderAll(); 
 })
-
-
 
