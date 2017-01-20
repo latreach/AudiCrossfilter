@@ -10,6 +10,12 @@ Los datos fueron simulados con el software estadístico [R](https://cran.r-proje
 * R y Javascript
 
 ##¿Cómo probar este crossfilter?
+Primero dirigete  o crea un directorio donde quieres clonar este repositorio.
+```sh
+mkdir tu directorio a crear
+cd tu directorio
+```
+
 ```sh
 git clone https://github.com/latreach/AudiCrossfilter
 npm install -g bower 
