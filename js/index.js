@@ -231,8 +231,10 @@ d3.csv("./data/datos.csv", function(error, data){
     /*.colors(d3.scale.ordinal()
       .range(["#003c65", "#64b5f6", "#18a151",
           "#ff9e10","#dc4a3d", "#3569d6", "#003366","#b87e7e", "#003366","black"]))*/
+    /*.colors(d3.scale.ordinal()
+      .range(["#98271F","#1A5050","#A53462","#0350AA","#F67301"]))*/
     .colors(d3.scale.ordinal()
-      .range(["#98271F","#1A5050","#A53462","#0350AA","#F67301"]))
+      .range(["black","#5b190b","#ba1909","#ff5635","#ffb49d"]))
     .group(consideraGroup)
     //.valueAccessor(function(p){return p.value.count})
     .elasticX(true)
@@ -250,8 +252,8 @@ d3.csv("./data/datos.csv", function(error, data){
     .width(500)
     .dimension(satisfechoDim)
     .colors(d3.scale.ordinal()
-      .range(["#982271F","#1A5050","#A53462","0350AA","#F67301"
-            ,"#003c65","#223F29", "#390104", "#240000", "black"]))
+      .range(["black","#331207","#61190b","#921b0c","#d81111","#c51708",
+              "#fc0201","#e31536","#ff6947","#ff9b7e"]))
     .group(satisfechoGroup)
     .elasticX(true)
     .xAxis().tickFormat(function(v){return numberFormatter(v)})
