@@ -7,11 +7,11 @@ Para embellecer el html se utilizó bootstrap y font-awesome.
 
 Los datos fueron simulados con el software estadístico [R](https://cran.r-project.org/).
 
-##Lenguajes de programación utilizados
+## Lenguajes de programación utilizados
 
 * R y Javascript
 
-##¿Cómo probar este crossfilter?
+## ¿Cómo probar este crossfilter?
 Primero dirigete  o crea un directorio donde quieres clonar este repositorio.
 ```sh
 mkdir tu directorio a crear
