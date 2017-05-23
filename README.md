@@ -1,5 +1,5 @@
-#Crossfilter Audi
-##Descripción
+# Crossfilter Audi
+## Descripción
 Este repositorio contiene un crossfilter con datos simulados para 
 la licitación de Audi Latinoamérica.
 Se utilizarán las librerías de javascript [crossfilter](https://github.com/square/crossfilter/wiki/API-Reference), [dc](http://dc-js.github.io/dc.js/), [d3](https://d3js.org/).
